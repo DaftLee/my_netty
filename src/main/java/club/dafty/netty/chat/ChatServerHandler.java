@@ -25,7 +25,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             if (channel == ch){
                 ch.writeAndFlush("我：\n"+msg);
             } else {
-                ch.writeAndFlush(ch.remoteAddress()+":\n"+msg);
+                ch.writeAndFlush(channel.remoteAddress()+":\n"+msg);
             }
         });
 
@@ -39,7 +39,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        channelGroup.writeAndFlush("服务器-"+channel.remoteAddress()+"加入\n");
+        channelGroup.writeAndFlush("服务器-"+channel.remoteAddress()+"加入");
         channelGroup.add(channel);
     }
 
@@ -51,7 +51,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        channelGroup.writeAndFlush("服务器-"+channel.remoteAddress()+"离开\n");
+        channelGroup.writeAndFlush("服务器-"+channel.remoteAddress()+"离开");
         // channelGroup.remove(channel);  //无需手动调用，netty会自动移除channelGroup中断开的连接
     }
 
