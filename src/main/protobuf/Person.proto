@@ -3,8 +3,34 @@ package club.dafty.protobuf;
 option optimize_for = SPEED;
 option java_package = "club.dafty.netty.protobuf";
 option java_outer_classname = "Person";
+
+message Messages {
+    enum DataType {
+        StudentType = 1;
+        TeacherType = 2;
+        XiaozhangType = 3;
+    }
+    required DataType data_type = 1;
+    oneof mydatabody {
+        Student student = 2;
+        Teacher teacher = 3;
+        Xiaozhang xiaozhang = 4;
+
+    }
+}
+
 message Student {
     required string name = 1;
+    optional int32 age = 2;
+    optional string address = 3;
+}
+message Teacher {
+    optional string name = 1;
+    optional int32 age = 2;
+    optional string address = 3;
+}
+message Xiaozhang {
+    optional string name = 1;
     optional int32 age = 2;
     optional string address = 3;
 }

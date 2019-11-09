@@ -18,7 +18,7 @@ public class ProtobufServerInitializer extends ChannelInitializer<SocketChannel>
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new ProtobufVarint32FrameDecoder());
-        pipeline.addLast(new ProtobufDecoder(Person.Student.getDefaultInstance()));
+        pipeline.addLast(new ProtobufDecoder(Person.Messages.getDefaultInstance()));
         pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast(new ProtobufEncoder());
 
